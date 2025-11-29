@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import menuOpen from '../../assets/menu_open.svg'
 import menuClose from '../../assets/menu_close.svg'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,22 +22,39 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const closeMenu = () => {
+  const handleNavigation = (sectionId) => {
     setIsMenuOpen(false)
-  }
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const navbarHeight = 80
-      const elementPosition = element.offsetTop - navbarHeight
-
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      })
+    if (sectionId === 'docs') {
+      navigate('/docs')
+      return
     }
-    closeMenu()
+
+    if (location.pathname !== '/') {
+      navigate('/')
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          const navbarHeight = 80
+          const elementPosition = element.offsetTop - navbarHeight
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          })
+        }
+      }, 100)
+    } else {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        const navbarHeight = 80
+        const elementPosition = element.offsetTop - navbarHeight
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
   }
 
   const navLinks = [
@@ -42,14 +62,15 @@ const Navbar = () => {
     { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
     { name: 'Portfolio', id: 'portfolio' },
+    { name: 'Docs', id: 'docs' },
     { name: 'Contact', id: 'contact' },
   ]
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-dark-900/80 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || location.pathname !== '/' ? 'bg-dark-900/80 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="cursor-pointer group" onClick={() => scrollToSection('home')}>
+        <div className="cursor-pointer group" onClick={() => handleNavigation('home')}>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-purple bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
             Phương
           </h1>
@@ -62,9 +83,12 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <li key={link.id}>
                 <a
-                  href={`#${link.id}`}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}
-                  className="text-lg font-medium text-gray-300 hover:text-primary transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+                  href={link.id === 'docs' ? '/docs' : `/#${link.id}`}
+                  onClick={(e) => { e.preventDefault(); handleNavigation(link.id); }}
+                  className={`text-lg font-medium transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${(location.pathname === '/docs' && link.id === 'docs') || (location.pathname === '/' && link.id === 'home' && !isScrolled)
+                      ? 'text-primary after:w-full'
+                      : 'text-gray-300 hover:text-primary'
+                    }`}
                 >
                   {link.name}
                 </a>
@@ -74,7 +98,7 @@ const Navbar = () => {
 
           <button
             className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_15px_rgba(218,124,37,0.4)]"
-            onClick={() => scrollToSection('contact')}
+            onClick={() => handleNavigation('contact')}
           >
             Connect with me
           </button>
@@ -95,8 +119,8 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <li key={link.id}>
                 <a
-                  href={`#${link.id}`}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}
+                  href={link.id === 'docs' ? '/docs' : `/#${link.id}`}
+                  onClick={(e) => { e.preventDefault(); handleNavigation(link.id); }}
                   className="text-3xl font-bold text-white hover:text-primary transition-colors"
                 >
                   {link.name}
@@ -106,7 +130,7 @@ const Navbar = () => {
           </ul>
           <button
             className="mt-10 px-8 py-3 rounded-full bg-gradient-to-r from-primary to-primary-purple text-white text-xl font-bold shadow-lg hover:shadow-primary/50 transition-all duration-300"
-            onClick={() => scrollToSection('contact')}
+            onClick={() => handleNavigation('contact')}
           >
             Connect with me
           </button>
