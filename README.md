@@ -2,7 +2,7 @@
 <a href="https://www.facebook.com/ducati.phuong.3" target="_blank">
   <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" />
 </a> 
-<a href="https://kuem271003.github.io/portfolio/" target="_blank">
+<a href="https://phuongdz2759.github.io/portfolio/" target="_blank">
   <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=About.me&logoColor=white" />
 </a>
 
@@ -273,8 +273,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Email**: [kuem271003@mail.com.com]
 - **LinkedIn**: [Your LinkedIn Profile]
-- **GitHub**: [https://github.com/kuem271003]
-- **Portfolio**: [Your Portfolio URL]
+- **GitHub**: [https://github.com/phuongdz2759]
+- **Portfolio**: [https://phuongdz2759.github.io/portfolio/]
 
 ---
 
