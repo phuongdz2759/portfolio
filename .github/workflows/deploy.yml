@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - deloy
 
 permissions:
   contents: write
@@ -33,3 +34,6 @@ jobs:
         with:
           folder: dist
           branch: gh-pages
+          clean: true
+          git-config-name: 'github-actions[bot]'
+          git-config-email: 'github-actions[bot]@users.noreply.github.com'
