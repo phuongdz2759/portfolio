@@ -23,7 +23,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:w-10 after:h-1 after:bg-primary after:rounded-full">Quick Links</h3>
             <ul className="space-y-3">
-              {['Home', 'About', 'Services', 'Portfolio', 'Contact'].map((item) => (
+              {['Home', 'About', 'Services', 'Portfolio', 'Docs', 'Contact'].map((item) => (
                 <li key={item}>
                   <a href={`#${item.toLowerCase()}`} className="text-gray-400 hover:text-primary transition-colors flex items-center group">
                     <span className="w-0 h-0.5 bg-primary mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2"></span>

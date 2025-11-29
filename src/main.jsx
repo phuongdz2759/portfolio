@@ -6,8 +6,12 @@ import App from './App.jsx'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { BrowserRouter } from 'react-router-dom'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <BrowserRouter basename="/portfolio">
+      <App />
+    </BrowserRouter>
   </StrictMode>,
 )

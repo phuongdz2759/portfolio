@@ -1,25 +1,22 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./Layout/Navbar/Navbar";
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Service from './components/Services/Services';
-import MyWork from "./components/MyWork/MyWork";
-import Contact from "./components/Contact/Contact";
 import Footer from "./Layout/Footer/Footer";
+import Home from "./view/Home";
+import DocsPage from "./view/DocsPage";
 
 const App = () => {
   return (
     <>
       <Navbar />
-      <Hero />
-      <About />
-      <Service />
-      <MyWork />
-      <Contact />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/docs" element={<DocsPage />} />
+      </Routes>
       <Footer />
-      <ToastContainer 
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
